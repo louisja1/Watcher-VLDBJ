@@ -1,0 +1,93 @@
+{
+    "tables": [
+        "title t"
+    ],
+    "static_tables": [
+        "movie_info",
+        "movie_info_idx",
+        "cast_info",
+        "movie_keyword"
+    ],
+    "sel_cols": {
+        "title": {
+            "production_year": {
+                "min": 1900,
+                "max": 2013
+            }
+        }
+    },
+    "jk_cols": {
+        "title": [
+            "id"
+        ],
+        "movie_info": [
+            "movie_id"
+        ],
+        "movie_info_idx": [
+            "movie_id"
+        ],
+        "cast_info": [
+            "movie_id"
+        ],
+        "movie_keyword": [
+            "movie_id"
+        ]
+    },
+    "timestamp_cols": {
+        "title": "production_year"
+    },
+    "sql": "select * from title t, movie_info mi, movie_info_idx mi_idx, cast_info ci, movie_keyword mk where t.id = mi.movie_id and t.id = mi_idx.movie_id and t.id = ci.movie_id and t.id = mk.movie_id and mi.info_type_id = 3 and mi_idx.info_type_id = 100 and t.production_year between {lb1} and {ub1};",
+    "pgtypes": {
+        "title": {
+            "id": "INTEGER",
+            "title": "TEXT",
+            "imdb_index": "VARCHAR(12)",
+            "kind_id": "INTEGER",
+            "production_year": "INTEGER",
+            "imdb_id": "INTEGER",
+            "phonetic_code": "VARCHAR(5)",
+            "episode_of_id": "INTEGER",
+            "season_nr": "INTEGER",
+            "episode_nr": "INTEGER",
+            "series_years": "VARCHAR(49)",
+            "md5sum": "VARCHAR(32)"
+        },
+        "movie_info": {
+            "id": "INTEGER",
+            "movie_id": "INTEGER",
+            "info_type_id": "INTEGER",
+            "info": "TEXT",
+            "note": "TEXT"
+        },
+        "movie_info_idx": {
+            "id": "INTEGER",
+            "movie_id": "INTEGER",
+            "info_type_id": "INTEGER",
+            "info": "TEXT",
+            "note": "TEXT"
+        },
+        "cast_info": {
+            "id": "INTEGER",
+            "person_id": "INTEGER",
+            "movie_id": "INTEGER",
+            "person_role_id": "INTEGER",
+            "note": "TEXT",
+            "nr_order": "INTEGER",
+            "role_id": "INTEGER"
+        },
+        "movie_keyword": {
+            "id": "INTEGER",
+            "movie_id": "INTEGER",
+            "keyword_id": "INTEGER"
+        }
+    },
+    "debug": false,
+    "table_filenames": {
+        "title": "../data/imdb/title_1959.csv",
+        "movie_info": "../data/imdb/movie_info.csv",
+        "movie_info_idx": "../data/imdb/movie_info_idx.csv",
+        "cast_info": "../data/imdb/cast_info.csv",
+        "movie_keyword": "../data/imdb/movie_keyword.csv"
+    },
+    "trainingset_filename": "../data/imdb/Q70-6B/Q70-6B_old_trainingset.txt"
+}
